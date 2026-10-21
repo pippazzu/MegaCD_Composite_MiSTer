@@ -57,7 +57,7 @@ wire [3:0] vcopt    = status[54:51];
 reg        en216p;
 reg  [4:0] voff;
 always @(posedge CLK_VIDEO) begin
-	en216p <= ((HDMI_WIDTH == 1920) && (HDMI_HEIGHT == 1080) && !forced_scandoubler && !scale);
+	en216p <= ((HDMI_WIDTH == 1920) && (HDMI_HEIGHT == 1080) && !forced_scandoubler);
 	voff <= (vcopt < 6) ? {vcopt,1'b0} : ({vcopt,1'b0} - 5'd24);
 end
 
@@ -175,7 +175,6 @@ localparam CONF_STR = {
 	"P1-;",
 	"P1O[50:49],Aspect ratio,Original,Full Screen,[ARC1],[ARC2];",
 	"HBP1O[30],320x224 Aspect,Original,Corrected;",
-	"HBP1O[35:33],Scandoubler Fx,None,HQ2x,CRT 25%,CRT 50%,CRT 75%;",
 	"P1-;",
 	"d9P1O[32],Vertical Crop,Disabled,216p(5x);",
 	"d9P1O[54:51],Crop Offset,0,2,4,8,10,12,-12,-10,-8,-6,-4,-2;",
@@ -1515,10 +1514,8 @@ md_cvbs_out md_cvbs_out
 	.b(comp_b)
 );
 
-wire [2:0] scale = status[35:33];
-wire [2:0] sl = scale ? scale - 1'd1 : 3'd0;
-
-assign VGA_SL = use_composite ? 2'd0 : {~interlace,~interlace}&sl[1:0];
+// No scandoubler, HQ2x or scanlines: the picture leaves at the console's own line rate.
+assign VGA_SL = 2'd0;
 assign VGA_F1 = use_composite ? 1'b0 : f1;
 
 wire lg_draw = lg_target && gun_mode && (~&status[44:43]);
@@ -1527,11 +1524,10 @@ video_mixer #(.LINE_LENGTH(400), .GAMMA(1)) video_mixer
 (
 	.*,
 
-	// The decoded stream is 13.4 MHz pixels, so the scandoubler and HQ2x
-	// stay off while it is selected.
+	// The scandoubler and HQ2x are not built.
 	.ce_pix(use_composite ? comp_pix : ce_pix),
-	.scandoubler(~use_composite && ~interlace && (scale || forced_scandoubler)),
-	.hq2x(~use_composite && scale==1),
+	.scandoubler(1'b0),
+	.hq2x(1'b0),
 	.freeze_sync(),
 
 	.VGA_DE(vga_de),

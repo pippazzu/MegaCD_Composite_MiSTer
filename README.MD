@@ -57,8 +57,11 @@ netlist; the Sony CXA1145 encoder follows its data sheet; Sega's Y/C filter netw
 solved exactly from the NTSC schematics; the television is Kitrinx's composite decoder from the
 NES core (MIT), timing its burst gate from the end of the VDP's 5.83 us sync and combing over a
 set's fixed 227.5-cycle delay, since Mega Drive lines are 228 subcarrier cycles. The picture
-streams with the beam: no frame buffer, under a microsecond of delay. The scandoubler, HQ2x,
-Border and 320x224 Aspect options do not apply while it is on. The old Composite Blend option is
+streams with the beam: no frame buffer, under a microsecond of delay. Border and 320x224
+Aspect options do not apply while it is on. The scandoubler, HQ2x, scanline effects and MiSTer's
+Y/C output are not built into this core (about 1,100 logic cells and 14 memory blocks freed): the
+picture leaves at the console's own line rate, fine for a PVM, other 15 kHz RGB displays and the
+HDMI scaler, but a 31 kHz VGA monitor on the analog output gets no line doubling. The old Composite Blend option is
 gone: the composite path does that blending itself.
 
 ### Known issues:
