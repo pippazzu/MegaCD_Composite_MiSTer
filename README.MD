@@ -48,6 +48,19 @@ A warm reset ("Reset", the front button) does not reset the CD unit - on the rea
 console's reset button never asserts the Mega CD's FRES (Genesis Plus GX: "FRES is only asserted
 on Power ON") - and preserves work RAM, so MD carts like X-Men that need reset-to-continue work.
 
+### Composite video
+**Audio & Video -> Composite Filter** (NTSC regions) replaces the RGB picture with the console's
+composite video, made the way a Model 1 / Model 2 board makes it and shown through a modelled NTSC
+television: Budget TV (notch filter) or Premium TV (adaptive comb), with Comp. Brightness and
+Comp. Sharpness. The VDP's DAC, C-SYNC and SBCR subcarrier pins come straight from the Nuked
+netlist; the Sony CXA1145 encoder follows its data sheet; Sega's Y/C filter networks around it are
+solved exactly from the NTSC schematics; the television is Kitrinx's composite decoder from the
+NES core (MIT), timing its burst gate from the end of the VDP's 5.83 us sync and combing over a
+set's fixed 227.5-cycle delay, since Mega Drive lines are 228 subcarrier cycles. The picture
+streams with the beam: no frame buffer, under a microsecond of delay. The scandoubler, HQ2x,
+Border and 320x224 Aspect options do not apply while it is on. The old Composite Blend option is
+gone: the composite path does that blending itself.
+
 ### Known issues:
 - **Warm reset with a disc in the drive** ("Reset" / the front button) returns to the Mega CD BIOS
   as it should, but the BIOS then shows "Put a DISC on the CD tray" instead of loading the disc

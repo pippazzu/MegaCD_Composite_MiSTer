@@ -12,7 +12,11 @@ set_global_assignment -name VERILOG_FILE rtl/genesis_lpf.v
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/audio_cond.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/audio_fix.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/video_cond.sv
-set_global_assignment -name SYSTEMVERILOG_FILE rtl/cofi.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/composite/md_cvbs_front.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/composite/cxa1145.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/composite/md_av_board.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/composite/composite_decoder.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtl/composite/md_cvbs_out.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/cheatcodes.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/lightgun.sv
 set_global_assignment -name SYSTEMVERILOG_FILE rtl/pad_io.sv
