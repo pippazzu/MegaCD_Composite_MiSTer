@@ -55,8 +55,8 @@ on Power ON") - and preserves work RAM, so MD carts like X-Men that need reset-t
 ### Composite video
 Based on Kitrinx's NES core implementation, measured against two real Model 1 consoles (VA6 US, VA4
 Japan) with an oscilloscope. Video chip pins from the Nuked netlist, Sony CXA1145 encoder from its
-data sheet, Sega's board filters from the schematics, decoded with Kitrinx's composite filters. One
-term, for fine coloured detail, is fitted to the measurements. Runs in step with the video signal,
+data sheet, Sega's board filters from the schematics, decoded with Kitrinx's composite filters. The
+strength of fine coloured detail (1-pixel stripes) is fitted to the VA6's measurements. Runs in step with the video signal,
 adding under a microsecond of delay. Same composite path as the [MegaDrive composite
 core](https://github.com/pippazzu/MegaDrive_MiSTer-Composite). Technical notes:
 [docs/composite.md](docs/composite.md).
