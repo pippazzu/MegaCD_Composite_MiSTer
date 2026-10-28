@@ -58,7 +58,7 @@ Japan) with an oscilloscope. Video chip pins from the Nuked netlist, Sony CXA114
 data sheet, Sega's board filters from the schematics, decoded with Kitrinx's composite filters. The
 strength of fine coloured detail (1-pixel stripes) is fitted to the VA6's measurements. Runs in step with the video signal,
 adding under a microsecond of delay. Same composite path as the [MegaDrive composite
-core](https://github.com/pippazzu/MegaDrive_MiSTer-Composite). Technical notes:
+core](https://github.com/pippazzu/MegaDrive_Composite_MiSTer). Technical notes:
 [docs/composite.md](docs/composite.md).
 
 Options, in **Audio & Video** (JP and US regions):
