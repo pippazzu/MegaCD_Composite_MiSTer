@@ -53,11 +53,10 @@ console's reset button never asserts the Mega CD's FRES (Genesis Plus GX: "FRES 
 on Power ON") - and preserves work RAM, so MD carts like X-Men that need reset-to-continue work.
 
 ### Composite video
-It is made the way Kitrinx's NES core does it, from the real signal chain: the
-video chip's own pins from the Nuked netlist, the board's Sony CXA1145 encoder from its data
-sheet, Sega's filter networks around it from the schematics, then a TV (Kitrinx's composite
-decoder). It was checked with an oscilloscope against two real Model 1 consoles; how strongly fine
-coloured detail reaches the picture is fitted to those measurements. It is the same composite path as the
+Based on Kitrinx's NES core implementation, measured against two real Model 1 consoles (VA6 US,
+VA4 Japan) with an oscilloscope. Video chip pins from the Nuked netlist, Sony CXA1145 encoder from its
+data sheet, Sega's board filters from the schematics, Kitrinx's composite decoder as the TV. One term,
+for fine coloured detail, is fitted to the measurements. Same composite path as the
 [MegaDrive composite core](https://github.com/pippazzu/MegaDrive_MiSTer-Composite). Technical
 notes: [docs/composite.md](docs/composite.md).
 
