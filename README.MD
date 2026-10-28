@@ -53,7 +53,8 @@ on Power ON") - and preserves work RAM, so MD carts like X-Men that need reset-t
 composite video, made the way a Model 1 / Model 2 board makes it and shown through a modelled NTSC
 television: Budget TV (notch filter) or Premium TV (adaptive comb), with Comp. Brightness and
 Comp. Sharpness. The VDP's DAC, C-SYNC and SBCR subcarrier pins come straight from the Nuked
-netlist; the Sony CXA1145 encoder follows its data sheet; Sega's Y/C filter networks around it are
+netlist; the Sony CXA1145 encoder follows its data sheet, plus a term fitted to a real Model 1 for
+how strongly fine coloured detail reaches the luma; Sega's Y/C filter networks around it are
 solved exactly from the NTSC schematics; the television is Kitrinx's composite decoder from the
 NES core (MIT), timing its burst gate from the end of the VDP's 5.83 us sync and combing over a
 set's fixed 227.5-cycle delay, since Mega Drive lines are 228 subcarrier cycles. The picture
