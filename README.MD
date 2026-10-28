@@ -1,7 +1,8 @@
 # [Sega MegaCD](https://en.wikipedia.org/wiki/Sega_CD) for [MiSTer Platform](https://github.com/MiSTer-devel/Main_MiSTer/wiki), with composite video
 
-This fork of retrorepair's Nuked-MD Mega CD core adds the console's composite video: the picture
-a Model 1 Mega Drive sends to a TV through its AV cable, shown on a modelled NTSC TV. See [Composite video](#composite-video).
+This fork of retrorepair's Nuked-MD Mega CD core adds the console's composite video: the picture a
+Model 1 Mega Drive sends through its AV cable, decoded with Kitrinx's composite filters. See
+[Composite video](#composite-video).
 
 Mega Drive side: [NukedMD-FPGA](https://github.com/nukeykt/Nuked-MD-FPGA) (cycle-accurate
 FC1004 / 68000 / Z80 / YM3438 from die shots) through the MiSTer HAL, with the FC1004
@@ -54,7 +55,7 @@ on Power ON") - and preserves work RAM, so MD carts like X-Men that need reset-t
 ### Composite video
 Based on Kitrinx's NES core implementation, measured against two real Model 1 consoles (VA6 US, VA4
 Japan) with an oscilloscope. Video chip pins from the Nuked netlist, Sony CXA1145 encoder from its
-data sheet, Sega's board filters from the schematics, Kitrinx's composite decoder as the TV. One
+data sheet, Sega's board filters from the schematics, decoded with Kitrinx's composite filters. One
 term, for fine coloured detail, is fitted to the measurements. Runs in step with the video signal,
 adding under a microsecond of delay. Same composite path as the [MegaDrive composite
 core](https://github.com/pippazzu/MegaDrive_MiSTer-Composite). Technical notes:
