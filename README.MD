@@ -1,4 +1,8 @@
-# [Sega MegaCD](https://en.wikipedia.org/wiki/Sega_CD) for [MiSTer Platform](https://github.com/MiSTer-devel/Main_MiSTer/wiki)
+# [Sega MegaCD](https://en.wikipedia.org/wiki/Sega_CD) for [MiSTer Platform](https://github.com/MiSTer-devel/Main_MiSTer/wiki), with composite video
+
+This fork of retrorepair's Nuked-MD Mega CD core adds the console's composite video: the picture
+a Model 1 Mega Drive sends to a TV through its AV cable, shown on a modelled NTSC TV, with dithering
+and rainbows as on the real console. See [Composite video](#composite-video).
 
 Mega Drive side: [NukedMD-FPGA](https://github.com/nukeykt/Nuked-MD-FPGA) (cycle-accurate
 FC1004 / 68000 / Z80 / YM3438 from die shots) through the MiSTer HAL, with the FC1004
@@ -49,16 +53,25 @@ console's reset button never asserts the Mega CD's FRES (Genesis Plus GX: "FRES 
 on Power ON") - and preserves work RAM, so MD carts like X-Men that need reset-to-continue work.
 
 ### Composite video
-**Audio & Video -> Composite Filter** (NTSC regions) shows the console's composite video, as a
-Model 1 board makes it, on a modelled NTSC TV: Budget TV (notch filter) or Premium TV (comb
-filter), with Comp. Brightness and Comp. Sharpness. It is the same composite path as the
-[MegaDrive composite core](https://github.com/pippazzu/MegaDrive_MiSTer-Composite). No frame
-buffer: the added delay is under a microsecond.
+It is made the way Kitrinx's NES core does it, from the real signal chain: the
+video chip's own pins from the Nuked netlist, the board's Sony CXA1145 encoder from its data
+sheet, Sega's filter networks around it from the schematics, then a TV (Kitrinx's composite
+decoder). It was checked with an oscilloscope against two real Model 1 consoles; how strongly fine
+coloured detail reaches the picture is fitted to those measurements. It is the same composite path as the
+[MegaDrive composite core](https://github.com/pippazzu/MegaDrive_MiSTer-Composite). Technical
+notes: [docs/composite.md](docs/composite.md).
 
-This core is for 15 kHz RGB CRTs and HDMI. The scandoubler, HQ2x, scanline effects, Y/C output and
-Composite Blend are removed; for 31 kHz VGA or S-video, use the main core.
+Options, in **Audio & Video** (JP and US regions):
 
-Technical notes and measurements: [docs/composite.md](docs/composite.md).
+* **Composite Filter**: Off / Budget TV (notch filter, softer colour) / Premium TV (comb filter,
+  sharper colour).
+* **Comp. Brightness**: Japan (the console's own black) / USA (a US set: the darkest shades crush to
+  black) / More / Much More / Too Much.
+* **Comp. Sharpness**: Off / Low / Medium / High (the TV's sharpness knob).
+
+No frame buffer: the added delay is under a microsecond. This core is for 15 kHz RGB CRTs and HDMI.
+The scandoubler, HQ2x, scanline effects, Y/C output and Composite Blend are removed; for 31 kHz VGA
+or S-video, use the main core.
 
 ### Known issues:
 - **Warm reset with a disc in the drive** ("Reset" / the front button) returns to the Mega CD BIOS
