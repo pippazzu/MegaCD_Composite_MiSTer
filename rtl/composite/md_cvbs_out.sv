@@ -3,8 +3,8 @@
 //
 // Each output pixel is held with a toggle; CLK_VIDEO registers the toggle
 // twice and takes the pixel when it changes, by which time the pixel has been
-// steady for at least one CLK_VIDEO cycle. A pixel lasts four decoder clocks,
-// eight CLK_VIDEO cycles, so none is missed and each gives one ce_pix.
+// steady for at least one CLK_VIDEO cycle. A pixel lasts two decoder clocks,
+// four CLK_VIDEO cycles, so none is missed and each gives one ce_pix.
 
 module md_cvbs_out (
 	input            clk_dec,

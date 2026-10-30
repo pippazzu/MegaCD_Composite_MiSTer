@@ -50,7 +50,14 @@ measured).
    leaves flat colours and colour-bar edges unchanged. A fit to one console, not a circuit model.
 5. **Composite filters**: Kitrinx's composite decoder from the NES core, run at 15 samples per
    subcarrier cycle, with the changes listed below. Its contrast input is fixed at what a set's
-   sync AGC gives for this console's sync level.
+   sync AGC gives for this console's sync level. One output pixel every two samples: 26.85 MHz,
+   1710 a line, so the scaler has 7.5 samples per subcarrier cycle to draw the decoded picture
+   with (one in four left it 3.75). `md_cvbs_out` carries each pixel to the 107 MHz video clock,
+   taken two video clocks after its toggle and two before the next pixel.
+6. **Gamma**: the decoded pixels come every four video clocks, too fast for the gamma block inside
+   `video_mixer`, which looks R, G and B up one after another. The core uses the framework's
+   `gamma_fast` instead, in front of the mixer on both paths, which looks the three up at once
+   from the same curve with the same one-pixel delay.
 
 Not implemented: interlaced sync, PAL.
 
@@ -89,7 +96,7 @@ With a 4.7 µs sync and standard NTSC timing, the decoder gives the same picture
 
 ## Build
 
-Quartus 17.0.2 Lite, seed 7 of 10. Logic 87%, DSP blocks 94/112, RAM blocks 93%. The worst setup
-slack is −1.87 ns at 107 MHz, on paths of the original core (retrorepair's release: −1.97 / −0.12 ns
+Quartus 17.0.2 Lite, seed 5 of 10. Logic 87%, DSP blocks 94/112, RAM blocks 93%. The worst setup
+slack is −1.665 ns at 107 MHz, on paths of the original core (retrorepair's release: −1.97 / −0.12 ns
 at 107 / 53.7 MHz). The 53.7 MHz clock, the HDMI clock and the composite paths pass, and hold slack
 has no violations.
